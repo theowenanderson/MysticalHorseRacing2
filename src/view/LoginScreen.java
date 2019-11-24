@@ -93,8 +93,17 @@ public class LoginScreen extends JFrame {
 					String sql = "Select * from Users where username='"+username+"' and Password='"+password+"'";					
 					ResultSet rs = stmt.executeQuery(sql);
 					if(rs.next()) {
-						System.out.println("test2");
 						JOptionPane.showMessageDialog(null, "Login Successful");
+						GameEngine.username_current = username;
+						sql = "Select id from Users where username='"+username+"'";
+						rs = stmt.executeQuery(sql);
+						if(rs.next()) {
+							GameEngine.userID_current = rs.getInt("id");
+							Menu men = new Menu();
+							men.setVisible(true);
+						}
+						else System.out.println("error");
+	
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "User not found");

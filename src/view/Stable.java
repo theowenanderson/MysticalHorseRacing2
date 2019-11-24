@@ -6,15 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import controller.GameEngine;
-
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 
-public class Menu extends JFrame {
+public class Stable extends JFrame {
 
 	private JPanel contentPane;
 
@@ -25,7 +19,7 @@ public class Menu extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu();
+					Stable frame = new Stable();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +31,7 @@ public class Menu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Menu() {
+	public Stable() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -45,17 +39,12 @@ public class Menu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnViewStable = new JButton("View Stable");
-		btnViewStable.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnViewStable.setBounds(10, 100, 89, 23);
-		contentPane.add(btnViewStable);
+		JButton btnViewHorses = new JButton("View Horses");
+		btnViewHorses.setBounds(10, 125, 120, 30);
+		contentPane.add(btnViewHorses);
 		
-		JLabel user_id_label = new JLabel("");
-		user_id_label.setBounds(81, 33, 46, 14);
-		contentPane.add(user_id_label);
-		user_id_label.setText(Integer.toString(GameEngine.userID_current));
+		JButton btnCreateHorse = new JButton("Create Horse");
+		btnCreateHorse.setBounds(151, 125, 120, 30);
+		contentPane.add(btnCreateHorse);
 	}
 }
