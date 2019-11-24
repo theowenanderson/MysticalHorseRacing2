@@ -10,7 +10,7 @@ public class GameEngine {
 		
 	}
 	
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		// Database Initial Connection, will have to be called for each class
 		
 		String username = "oldtown";
