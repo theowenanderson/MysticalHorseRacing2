@@ -292,7 +292,7 @@ public class HorseCreator extends JFrame {
 				int luck = Integer.valueOf(lbl7.getText());
 				int total = val_legsize + val_bodysize + stamina + strength + acceleration + confidence + luck;
 				current_allocation.setText(Integer.toString(total));
-				// if total > maxAllocation , display "too much allocated"
+				// if total > maxAllocation , display "too much allocated" and disallow creation
 				}
 			
 		
