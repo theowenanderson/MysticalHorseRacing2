@@ -38,7 +38,7 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -48,6 +48,8 @@ public class Menu extends JFrame {
 		JButton btnViewStable = new JButton("View Stable");
 		btnViewStable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Stable s = new Stable();
+				s.setVisible(true);
 			}
 		});
 		btnViewStable.setBounds(10, 100, 89, 23);

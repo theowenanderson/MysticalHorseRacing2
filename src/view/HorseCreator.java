@@ -13,6 +13,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HorseCreator extends JFrame {
 
@@ -40,17 +42,58 @@ public class HorseCreator extends JFrame {
 	 */
 	public HorseCreator() {
 		int maxAllocation = 50;
-		int currentAllocation = maxAllocation;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 575, 413);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lbl1 = new JLabel("");
+		lbl1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl1.setBounds(198, 11, 64, 26);
+		contentPane.add(lbl1);
+		
+		JLabel lbl2 = new JLabel("");
+		lbl2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl2.setBounds(198, 62, 64, 26);
+		contentPane.add(lbl2);
+		
+		JLabel lbl3 = new JLabel("");
+		lbl3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl3.setBounds(198, 112, 64, 26);
+		contentPane.add(lbl3);
+		
+		JLabel lbl4 = new JLabel("");
+		lbl4.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl4.setBounds(198, 173, 64, 26);
+		contentPane.add(lbl4);
+		
+		JLabel lbl5 = new JLabel("");
+		lbl5.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl5.setBounds(198, 221, 64, 26);
+		contentPane.add(lbl5);
+		
+		JLabel lbl6 = new JLabel("");
+		lbl6.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl6.setBounds(198, 272, 64, 26);
+		contentPane.add(lbl6);
+		
+		JLabel lbl7 = new JLabel("");
+		lbl7.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl7.setBounds(198, 324, 64, 26);
+		contentPane.add(lbl7);
+		
+		
 		JSlider slider_legsize = new JSlider();
 		slider_legsize.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl1.setText(Integer.toString(source.getValue()));
+				}
 			}
 		});
 		slider_legsize.setPaintLabels(true);
@@ -63,6 +106,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(slider_legsize);
 		
 		JSlider slider_bodysize = new JSlider();
+		slider_bodysize.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl2.setText(Integer.toString(source.getValue()));
+				}
+			}
+		});
 		slider_bodysize.setSnapToTicks(true);
 		slider_bodysize.setPaintTicks(true);
 		slider_bodysize.setPaintLabels(true);
@@ -72,7 +124,17 @@ public class HorseCreator extends JFrame {
 		slider_bodysize.setBounds(349, 62, 200, 43);
 		contentPane.add(slider_bodysize);
 		
+		
 		JSlider slider_stamina = new JSlider();
+		slider_stamina.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl3.setText(Integer.toString(source.getValue()));
+				}
+			}
+		});
 		slider_stamina.setSnapToTicks(true);
 		slider_stamina.setPaintTicks(true);
 		slider_stamina.setPaintLabels(true);
@@ -83,6 +145,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(slider_stamina);
 		
 		JSlider slider_strength = new JSlider();
+		slider_strength.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl4.setText(Integer.toString(source.getValue()));
+				}
+			}
+		});
 		slider_strength.setSnapToTicks(true);
 		slider_strength.setPaintTicks(true);
 		slider_strength.setPaintLabels(true);
@@ -93,6 +164,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(slider_strength);
 		
 		JSlider slider_acceleration = new JSlider();
+		slider_acceleration.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl5.setText(Integer.toString(source.getValue()));
+				}
+			}
+		});
 		slider_acceleration.setPaintLabels(true);
 		slider_acceleration.setPaintTicks(true);
 		slider_acceleration.setSnapToTicks(true);
@@ -103,6 +183,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(slider_acceleration);
 		
 		JSlider slider_confidence = new JSlider();
+		slider_confidence.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl6.setText(Integer.toString(source.getValue()));
+				}
+			}
+		});
 		slider_confidence.setSnapToTicks(true);
 		slider_confidence.setPaintTicks(true);
 		slider_confidence.setPaintLabels(true);
@@ -113,6 +202,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(slider_confidence);
 		
 		JSlider slider_luck = new JSlider();
+		slider_luck.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if(!source.getValueIsAdjusting()) {
+					
+					lbl7.setText(Integer.toString(source.getValue()));
+				}
+			}
+		});
 		slider_luck.setSnapToTicks(true);
 		slider_luck.setPaintTicks(true);
 		slider_luck.setPaintLabels(true);
@@ -174,10 +272,40 @@ public class HorseCreator extends JFrame {
 		contentPane.add(horseName);
 		horseName.setColumns(10);
 		
-		JButton btnCreate = new JButton("Create");
-		btnCreate.setBounds(21, 306, 89, 23);
-		contentPane.add(btnCreate);
+		JLabel lblCurrentAllocation = new JLabel("Current Allocation:");
+		lblCurrentAllocation.setBounds(10, 123, 101, 15);
+		contentPane.add(lblCurrentAllocation);
+		
+		JLabel current_allocation = new JLabel("35");
+		current_allocation.setBounds(131, 123, 46, 15);
+		contentPane.add(current_allocation);
+		
+		JButton btnCheck = new JButton("Check");
+		btnCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int val_legsize = Integer.valueOf(lbl1.getText());
+				int val_bodysize = Integer.valueOf(lbl2.getText()); 
+				int stamina = Integer.valueOf(lbl3.getText());
+				int strength = Integer.valueOf(lbl4.getText());
+				int acceleration = Integer.valueOf(lbl5.getText());
+				int confidence = Integer.valueOf(lbl6.getText());
+				int luck = Integer.valueOf(lbl7.getText());
+				int total = val_legsize + val_bodysize + stamina + strength + acceleration + confidence + luck;
+				current_allocation.setText(Integer.toString(total));
+				// if total > maxAllocation , display "too much allocated"
+				}
+			
+		
+		});
+		btnCheck.setBounds(21, 306, 89, 23);
+		contentPane.add(btnCheck);
 		
 
+		
+		
+	
+
+		
+		
 	}
 }
