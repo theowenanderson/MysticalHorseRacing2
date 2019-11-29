@@ -34,12 +34,14 @@ public class Stable extends JFrame {
 	 * Create the frame.
 	 */
 	public Stable() {
+		setTitle("The Stable");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		
 		JButton btnViewHorses = new JButton("View Horses");
 		btnViewHorses.addActionListener(new ActionListener() {
@@ -48,11 +50,17 @@ public class Stable extends JFrame {
 				h.setVisible(true);
 			}
 		});
+		
+		JButton btnViewHorses = new JButton("View Horses");
 		btnViewHorses.setBounds(10, 125, 120, 30);
 		contentPane.add(btnViewHorses);
 		
 		JButton btnCreateHorse = new JButton("Create Horse");
 		btnCreateHorse.setBounds(151, 125, 120, 30);
 		contentPane.add(btnCreateHorse);
+		
+		JButton btnReturnToMenuButton = new JButton("Return to Main Menu");
+		btnReturnToMenuButton.setBounds(132, 228, 181, 23);
+		contentPane.add(btnReturnToMenuButton);
 	}
 }

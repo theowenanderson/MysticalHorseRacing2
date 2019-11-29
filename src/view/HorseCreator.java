@@ -41,14 +41,17 @@ public class HorseCreator extends JFrame {
 	 * Create the frame.
 	 */
 	public HorseCreator() {
+		setTitle("Create a Horse!");
 		int maxAllocation = 50;
-
+		int currentAllocation = maxAllocation;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 575, 413);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+
 		
 		JLabel lbl1 = new JLabel("");
 		lbl1.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -86,12 +89,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(lbl7);
 		
 		
+
+
 		JSlider slider_legsize = new JSlider();
 		slider_legsize.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
+				
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl1.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -110,7 +116,7 @@ public class HorseCreator extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl2.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -124,13 +130,12 @@ public class HorseCreator extends JFrame {
 		slider_bodysize.setBounds(349, 62, 200, 43);
 		contentPane.add(slider_bodysize);
 		
-		
 		JSlider slider_stamina = new JSlider();
 		slider_stamina.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl3.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -149,7 +154,7 @@ public class HorseCreator extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl4.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -168,7 +173,7 @@ public class HorseCreator extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl5.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -187,7 +192,7 @@ public class HorseCreator extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl6.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -206,7 +211,7 @@ public class HorseCreator extends JFrame {
 			public void stateChanged(ChangeEvent e) {
 				JSlider source = (JSlider)e.getSource();
 				if(!source.getValueIsAdjusting()) {
-					
+
 					lbl7.setText(Integer.toString(source.getValue()));
 				}
 			}
@@ -272,14 +277,15 @@ public class HorseCreator extends JFrame {
 		contentPane.add(horseName);
 		horseName.setColumns(10);
 		
+		
 		JLabel lblCurrentAllocation = new JLabel("Current Allocation:");
 		lblCurrentAllocation.setBounds(10, 123, 101, 15);
 		contentPane.add(lblCurrentAllocation);
-		
+
 		JLabel current_allocation = new JLabel("35");
 		current_allocation.setBounds(131, 123, 46, 15);
 		contentPane.add(current_allocation);
-		
+
 		JButton btnCheck = new JButton("Check");
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -294,18 +300,20 @@ public class HorseCreator extends JFrame {
 				current_allocation.setText(Integer.toString(total));
 				// if total > maxAllocation , display "too much allocated" and disallow creation
 				}
-			
-		
+
+
 		});
 		btnCheck.setBounds(21, 306, 89, 23);
 		contentPane.add(btnCheck);
 		
+		JButton btnReturnToStable = new JButton("Return to Stable");
+		btnReturnToStable.setBounds(21, 344, 134, 23);
+		contentPane.add(btnReturnToStable);
+		
+		JLabel lblHorseName = new JLabel("Horse Name:");
+		lblHorseName.setBounds(21, 228, 86, 14);
+		contentPane.add(lblHorseName);
+		
 
-		
-		
-	
-
-		
-		
 	}
 }
