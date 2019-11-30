@@ -51,9 +51,13 @@ public class Stable extends JFrame {
 			}
 		});
 		
-		JButton btnViewHorses = new JButton("View Horses");
-		btnViewHorses.setBounds(10, 125, 120, 30);
-		contentPane.add(btnViewHorses);
+		JButton btnViewHorses1 = new JButton("View Horses");
+		btnViewHorses1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnViewHorses1.setBounds(10, 125, 120, 30);
+		contentPane.add(btnViewHorses1);
 		
 		JButton btnCreateHorse = new JButton("Create Horse");
 		btnCreateHorse.setBounds(151, 125, 120, 30);
