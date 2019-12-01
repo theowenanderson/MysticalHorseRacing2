@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Random;
 
 public class Horse {
 	String name;
@@ -26,8 +27,18 @@ public class Horse {
 		this.luck = luck;
 
 	}
+	//Random horse create
 	public Horse() {
-		
+		Random rand = new Random();
+		this.name = "CPU" + rand.nextInt(1000);
+		this.id = -1;
+		this.legSize = rand.nextInt(7);
+		this.bodySize = rand.nextInt(7);
+		this.stamina = rand.nextInt(7);
+		this.strength = rand.nextInt(7);
+		this.acceleration = rand.nextInt(7);
+		this.confidence = rand.nextInt(7);
+		this.luck = rand.nextInt(7);
 	}
 	public String getName() {
 		return name;

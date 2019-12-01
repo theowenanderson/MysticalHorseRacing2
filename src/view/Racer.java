@@ -119,6 +119,7 @@ public class Racer extends JFrame {
 		
 		
 		Statement stmt;
+	
 		int x = 0;
 		boolean state = true;
 		int id;
@@ -147,21 +148,16 @@ public class Racer extends JFrame {
 				else System.out.println("error in getting horse");
 				rs2.close();
 			}
-
-			
-			
-			
-				
-			
-			
-
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		int num_horses = id_list.size();
+		while(num_horses != 8) {
+			h.add(new Horse());
+			num_horses++;
+		}
 		int finish = 1000;
 		for(int i = 0; x <= finish; x++) {
 			
