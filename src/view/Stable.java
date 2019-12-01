@@ -60,10 +60,21 @@ public class Stable extends JFrame {
 		contentPane.add(btnViewHorses1);
 		
 		JButton btnCreateHorse = new JButton("Create Horse");
+		btnCreateHorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HorseCreator h = new HorseCreator();
+				h.setVisible(true);
+			}
+		});
 		btnCreateHorse.setBounds(151, 125, 120, 30);
 		contentPane.add(btnCreateHorse);
 		
 		JButton btnReturnToMenuButton = new JButton("Return to Main Menu");
+		btnReturnToMenuButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnReturnToMenuButton.setBounds(132, 228, 181, 23);
 		contentPane.add(btnReturnToMenuButton);
 	}

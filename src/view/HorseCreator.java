@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.sql.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,8 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSlider;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.event.ChangeListener;
+
+import controller.GameEngine;
+import model.Horse;
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -286,6 +293,52 @@ public class HorseCreator extends JFrame {
 		current_allocation.setBounds(131, 123, 46, 15);
 		contentPane.add(current_allocation);
 
+
+		
+		JButton btnReturnToStable = new JButton("Return to Stable");
+		btnReturnToStable.setBounds(21, 344, 134, 23);
+		contentPane.add(btnReturnToStable);
+		
+		JLabel lblHorseName = new JLabel("Horse Name:");
+		lblHorseName.setBounds(21, 228, 86, 14);
+		contentPane.add(lblHorseName);
+		
+		JLabel lblYourAllocationIs = new JLabel("Your Allocation is too high!");
+		lblYourAllocationIs.setBounds(142, 309, 155, 14);
+		contentPane.add(lblYourAllocationIs);
+		lblYourAllocationIs.setVisible(false);
+		
+		JButton btnCreateHorse = new JButton("Create Horse");
+		btnCreateHorse.setVisible(false);
+		btnCreateHorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int val_legsize = Integer.valueOf(lbl1.getText());
+				int val_bodysize = Integer.valueOf(lbl2.getText()); 
+				int stamina = Integer.valueOf(lbl3.getText());
+				int strength = Integer.valueOf(lbl4.getText());
+				int acceleration = Integer.valueOf(lbl5.getText());
+				int confidence = Integer.valueOf(lbl6.getText());
+				int luck = Integer.valueOf(lbl7.getText());
+				int total = val_legsize + val_bodysize + stamina + strength + acceleration + confidence + luck;
+				String horse_name = horseName.getText();
+				Horse h = new Horse(horse_name,val_legsize, val_bodysize, stamina, strength, acceleration, confidence, luck, total);
+				Connection conn = GameEngine.getConnection();
+				PreparedStatement createHorse;
+				try {
+					createHorse = conn.prepareStatement("INSERT INTO horses (linked_user_id,horse_name,horse_legsize, horse_bodysize,horse_stamina,horse_strength,horse_acceleration,horse_confidence,horse_luck)"
+							+ " VALUES ('"+GameEngine.userID_current+"','"+horse_name+"', '"+val_legsize+"', '"+val_bodysize+"','"+stamina+"','"+strength+"','"+acceleration+"','"+confidence+"','"+luck+"')");
+					createHorse.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Horse Creation successful");
+					dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Horse Creation failed");
+					e1.printStackTrace();
+				}				
+			}
+		});
+		btnCreateHorse.setBounds(154, 309, 89, 23);
+		contentPane.add(btnCreateHorse);
 		JButton btnCheck = new JButton("Check");
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -298,22 +351,20 @@ public class HorseCreator extends JFrame {
 				int luck = Integer.valueOf(lbl7.getText());
 				int total = val_legsize + val_bodysize + stamina + strength + acceleration + confidence + luck;
 				current_allocation.setText(Integer.toString(total));
-				// if total > maxAllocation , display "too much allocated" and disallow creation
+				if(total > 50 || total == 0) {
+					lblYourAllocationIs.setVisible(true);
+					btnCreateHorse.setVisible(false);
+				}
+				else {
+					lblYourAllocationIs.setVisible(false);
+					btnCreateHorse.setVisible(true);
+				}
 				}
 
 
 		});
 		btnCheck.setBounds(21, 306, 89, 23);
 		contentPane.add(btnCheck);
-		
-		JButton btnReturnToStable = new JButton("Return to Stable");
-		btnReturnToStable.setBounds(21, 344, 134, 23);
-		contentPane.add(btnReturnToStable);
-		
-		JLabel lblHorseName = new JLabel("Horse Name:");
-		lblHorseName.setBounds(21, 228, 86, 14);
-		contentPane.add(lblHorseName);
-		
 
 	}
 }

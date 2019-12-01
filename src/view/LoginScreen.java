@@ -99,11 +99,21 @@ public class LoginScreen extends JFrame {
 						rs = stmt.executeQuery(sql);
 						if(rs.next()) {
 							GameEngine.userID_current = rs.getInt("id");
-							Menu men = new Menu();
-							men.setVisible(true);
+							sql = "Select balance from Users where username='"+username+"'";
+							rs = stmt.executeQuery(sql);
+							if(rs.next()) {
+								System.out.println("yes");
+								GameEngine.userIDbalance = rs.getInt("balance");
+								
+							}
+							else System.out.println("error with obtaining balance");
+							
 						}
-						else System.out.println("error");
 	
+						else System.out.println("error with obtaining user id");
+						Menu men = new Menu();
+						men.setVisible(true);
+						dispose();
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "User not found");

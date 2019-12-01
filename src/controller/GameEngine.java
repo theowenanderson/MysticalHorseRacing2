@@ -5,6 +5,7 @@ import java.sql.*;
 public class GameEngine {
 	public static String username_current = "";
 	public static int userID_current;
+	public static int userIDbalance;
 	public void initialize() {
 		Connection initConnect = getConnection();
 		//test

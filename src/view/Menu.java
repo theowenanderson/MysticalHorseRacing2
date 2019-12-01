@@ -27,7 +27,6 @@ public class Menu extends JFrame {
 			public void run() {
 				try {
 					Menu frame = new Menu();
-					LocalDateTime ldt = LocalDateTime.now();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,6 +39,12 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
+		
+
+		
+		
+		
+		
 		setTitle("Main Menu");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -47,6 +52,13 @@ public class Menu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		// get balance
+		JLabel lbl_balance = new JLabel("");
+		lbl_balance.setBounds(345, 45, 46, 14);
+		contentPane.add(lbl_balance);
+		lbl_balance.setText(Integer.toString(GameEngine.userIDbalance));
+		
 		
 		JButton btnViewStable = new JButton("View Stable");
 		btnViewStable.addActionListener(new ActionListener() {
@@ -57,11 +69,6 @@ public class Menu extends JFrame {
 		});
 		btnViewStable.setBounds(10, 100, 130, 23);
 		contentPane.add(btnViewStable);
-		
-		JLabel user_id_label = new JLabel("");
-		user_id_label.setBounds(81, 45, 46, 14);
-		contentPane.add(user_id_label);
-		user_id_label.setText(Integer.toString(GameEngine.userID_current));
 		
 		JButton btnNewButton = new JButton("Manage Jockeys");
 		btnNewButton.setBounds(294, 100, 130, 23);
@@ -76,6 +83,14 @@ public class Menu extends JFrame {
 		contentPane.add(btnViewRaceIn);
 		
 		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameEngine.userID_current = 0;
+				dispose();
+				LoginScreen ls = new LoginScreen();
+				ls.setVisible(true);
+			}
+		});
 		btnLogOut.setBounds(335, 11, 89, 23);
 		contentPane.add(btnLogOut);
 		
@@ -90,6 +105,8 @@ public class Menu extends JFrame {
 		JLabel lbl_time = new JLabel("");
 		lbl_time.setBounds(192, 11, 46, 14);
 		contentPane.add(lbl_time);
+		
+	
 	
 		
 		
