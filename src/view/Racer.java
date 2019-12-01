@@ -131,7 +131,21 @@ public class Racer extends JFrame {
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				id_list.add(rs.getInt("user_id_entered"));
-				
+			}
+			rs.close();
+			for(int i: id_list) {
+				System.out.println("got here");
+				sql = "Select * from horses where linked_user_id='"+i+"'";	
+				ResultSet rs2 = stmt.executeQuery(sql);
+				if(rs2.next()) {
+							h.add(new Horse(id_list.get(x),rs2.getString("horse_name"),
+							rs2.getInt("horse_legsize"),rs2.getInt("horse_bodysize"),rs2.getInt("horse_stamina")
+							,rs2.getInt("horse_strength"),rs2.getInt("horse_acceleration"),rs2.getInt("horse_confidence")
+							,rs2.getInt("horse_luck")));
+							x++;
+				}
+				else System.out.println("error in getting horse");
+				rs2.close();
 			}
 
 			
@@ -157,11 +171,7 @@ public class Racer extends JFrame {
 
 }
 /*								
-								h.add(new Horse(id_list.get(x),rs2.getString("horse_name"),
-								rs2.getInt("horse_legsize"),rs2.getInt("horse_bodysize"),rs2.getInt("horse_stamina")
-								,rs2.getInt("horse_strength"),rs2.getInt("horse_acceleration"),rs2.getInt("horse_confidence")
-								,rs2.getInt("horse_luck")));
-								x++;
+							
 					}
  * 
  */ 
