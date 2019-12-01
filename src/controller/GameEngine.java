@@ -22,10 +22,12 @@ public class GameEngine {
 		try {
 			Connection conn = DriverManager.getConnection(url,username,pass);
 			System.out.println("Connected");
+
 			return conn;
 		}catch (Exception exc) {
 			System.out.println("error in connection to database");
 			return null;
 		}
 	}
+	
 }

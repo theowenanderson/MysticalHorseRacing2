@@ -11,6 +11,7 @@ import controller.GameEngine;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
@@ -26,6 +27,7 @@ public class Menu extends JFrame {
 			public void run() {
 				try {
 					Menu frame = new Menu();
+					LocalDateTime ldt = LocalDateTime.now();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -84,5 +86,12 @@ public class Menu extends JFrame {
 		JLabel user_cash_label = new JLabel("$");
 		user_cash_label.setBounds(335, 45, 46, 14);
 		contentPane.add(user_cash_label);
+		
+		JLabel lbl_time = new JLabel("");
+		lbl_time.setBounds(192, 11, 46, 14);
+		contentPane.add(lbl_time);
+	
+		
+		
 	}
 }
