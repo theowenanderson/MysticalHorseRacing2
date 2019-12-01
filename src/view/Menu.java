@@ -102,9 +102,22 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Connection conn = GameEngine.getConnection();
-					PreparedStatement enterRace = conn.prepareStatement("INSERT INTO race (user_id_entered) VALUES ('"+GameEngine.userID_current+"')");				
-					enterRace.executeUpdate();
-					JOptionPane.showMessageDialog(null, "Entering Race Successful");
+					
+					Statement stmt = conn.createStatement();
+					String checkRace = "Select * from race where user_id_entered='" + GameEngine.userID_current + "'";
+					ResultSet rs = stmt.executeQuery(checkRace);
+					if(rs.next())
+					{
+						PreparedStatement enterRace = conn.prepareStatement("INSERT INTO race (user_id_entered) VALUES ('"+GameEngine.userID_current+"')");				
+						enterRace.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Entering Race Successful");
+						
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Already entered into race");
+					}
+					
 					}
 				catch(Exception e1) {
 					JOptionPane.showMessageDialog(null, "Entering Race Failed");
