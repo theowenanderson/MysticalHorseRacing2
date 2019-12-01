@@ -104,9 +104,9 @@ public class Menu extends JFrame {
 					Connection conn = GameEngine.getConnection();
 					
 					Statement stmt = conn.createStatement();
-					String checkRace = "Select * from race where user_id_entered='" + GameEngine.userID_current + "'";
+					String checkRace = "Select * from race where user_id_entered='" +GameEngine.userID_current+ "'";
 					ResultSet rs = stmt.executeQuery(checkRace);
-					if(rs.next())
+					if(!rs.next())
 					{
 						PreparedStatement enterRace = conn.prepareStatement("INSERT INTO race (user_id_entered) VALUES ('"+GameEngine.userID_current+"')");				
 						enterRace.executeUpdate();
