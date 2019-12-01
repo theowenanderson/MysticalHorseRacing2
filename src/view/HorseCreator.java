@@ -329,6 +329,7 @@ public class HorseCreator extends JFrame {
 							+ " VALUES ('"+GameEngine.userID_current+"','"+horse_name+"', '"+val_legsize+"', '"+val_bodysize+"','"+stamina+"','"+strength+"','"+acceleration+"','"+confidence+"','"+luck+"')");
 					createHorse.executeUpdate();
 					JOptionPane.showMessageDialog(null, "Horse Creation successful");
+					GameEngine.userIDbalance -= 500;
 					dispose();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -355,6 +356,8 @@ public class HorseCreator extends JFrame {
 					lblYourAllocationIs.setVisible(true);
 					btnCreateHorse.setVisible(false);
 				}
+				else if(GameEngine.userIDbalance < 500)
+					JOptionPane.showMessageDialog(null,"You do not have sufficient funds to create a horse");
 				else {
 					lblYourAllocationIs.setVisible(false);
 					btnCreateHorse.setVisible(true);

@@ -54,6 +54,9 @@ public class Stable extends JFrame {
 		JButton btnViewHorses1 = new JButton("View Horses");
 		btnViewHorses1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				HorseViewer hv = new HorseViewer();
+				hv.setVisible(true);
 			}
 		});
 		btnViewHorses1.setBounds(10, 125, 120, 30);

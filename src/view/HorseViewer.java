@@ -1,11 +1,15 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.sql.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.GameEngine;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -35,6 +39,19 @@ public class HorseViewer extends JFrame {
 	 * Create the frame.
 	 */
 	public HorseViewer() {
+		Connection conn = GameEngine.getConnection();
+		int[] horses = {};
+		
+		int i = 0;
+		Statement stmt = conn.createStatement();
+		String sql = "Select * from horses where linked_user_id='"+GameEngine.userID_current+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		rs = stmt.executeQuery(sql);
+		while(rs.next()) {
+			horses[i] = rs.getInt("horse_name");
+			i++;
+		}
+		
 		setTitle("View Horses");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -55,7 +72,8 @@ public class HorseViewer extends JFrame {
 		btnReturnToStables.setBounds(140, 209, 154, 42);
 		contentPane.add(btnReturnToStables);
 		
-		JComboBox comboBoxHorseSelection = new JComboBox();
+		JComboBox comboBoxHorseSelection = new JComboBox(horses);
+		comboBoxHorseSelection.setSelectedIndex(0);
 		comboBoxHorseSelection.setBounds(140, 95, 154, 20);
 		contentPane.add(comboBoxHorseSelection);
 		
