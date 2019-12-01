@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManageJockeys extends JFrame {
 
@@ -35,7 +37,7 @@ public class ManageJockeys extends JFrame {
 	 */
 	public ManageJockeys() {
 		setTitle("Manage Jockeys");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 178);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -51,6 +53,11 @@ public class ManageJockeys extends JFrame {
 		contentPane.add(btnFireJockey);
 		
 		JButton btnReturnToMain = new JButton("Return to Main Menu");
+		btnReturnToMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnReturnToMain.setBounds(150, 61, 135, 68);
 		contentPane.add(btnReturnToMain);
 		

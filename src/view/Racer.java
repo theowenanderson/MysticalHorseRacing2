@@ -126,10 +126,10 @@ public class Racer extends JFrame {
 		int id;
 		List<Horse> h = new ArrayList<Horse>();
 		List<Integer> id_list = new ArrayList<Integer>();
-
+		String sql;
 		try {
 			stmt = conn.createStatement();
-			String sql = "Select * from race";					
+			sql = "Select * from race";					
 			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()) {
 				id_list.add(rs.getInt("user_id_entered"));
@@ -163,13 +163,25 @@ public class Racer extends JFrame {
 		int num = rand.nextInt(h.size());
 		List<Integer> num_list = new ArrayList<Integer>();
 		lbl_1st.setText(h.get(3).getName());
-		lbl_2nd.setText(h.get(2).getName());
+		lbl_2nd.setText(h.get(1).getName());
 		lbl_3rd.setText(h.get(5).getName());
 		lbl_4th.setText(h.get(7).getName());
-		lbl_5th.setText(h.get(1).getName());
+		lbl_5th.setText(h.get(2).getName());
 		lbl_6th.setText(h.get(4).getName());
 		lbl_7th.setText(h.get(0).getName());
 		lbl_8th.setText(h.get(6).getName());
+		/*sql = "update users set balance = 1300 where id='"+h.get(1).getId()+"'";
+		ResultSet rs3;
+		try {
+			stmt = conn.createStatement();
+			rs3 = stmt.executeQuery(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+
 		
 	}
 

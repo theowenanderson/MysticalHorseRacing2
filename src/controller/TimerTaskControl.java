@@ -4,6 +4,8 @@ import java.text.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class TimerTaskControl extends TimerTask {
 	
 	public void create() throws ParseException {
@@ -34,7 +36,7 @@ public class TimerTaskControl extends TimerTask {
 	    timer.schedule(new TimerTaskControl(), newDateMade, period );
 	}
 	public void run() {
-		System.out.println("timer works");
+		JOptionPane.showMessageDialog(null,"RACE HAS BEGUN");
 		BeginRace br = new BeginRace();
 		br.run();
 	}

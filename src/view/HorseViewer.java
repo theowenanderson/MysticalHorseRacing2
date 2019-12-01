@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.sql.*;
 import java.awt.EventQueue;
 
@@ -10,11 +11,13 @@ import javax.swing.border.EmptyBorder;
 
 import controller.GameEngine;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -56,7 +59,7 @@ public class HorseViewer extends JFrame {
 		}
 		
 		setTitle("View Horses");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,16 +67,22 @@ public class HorseViewer extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnFeedHorse = new JButton("Feed Selected Horse");
+		btnFeedHorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FeedHorse f = new FeedHorse();
+				f.setVisible(true);
+			}
+		});
 		btnFeedHorse.setBounds(10, 175, 174, 23);
 		contentPane.add(btnFeedHorse);
 		
 		JComboBox comboBoxHorseSelection = new JComboBox(horses);
 		comboBoxHorseSelection.setSelectedIndex(0);
-		comboBoxHorseSelection.setBounds(140, 95, 154, 20);
+		comboBoxHorseSelection.setBounds(10, 36, 154, 20);
 		contentPane.add(comboBoxHorseSelection);
 		
 		JLabel lblSelectHorse = new JLabel("Select a Horse");
-		lblSelectHorse.setBounds(178, 70, 96, 14);
+		lblSelectHorse.setBounds(51, 11, 96, 14);
 		contentPane.add(lblSelectHorse);
 		
 		JButton btnRetireHorse = new JButton("Retire Selected Horse");
@@ -104,6 +113,12 @@ public class HorseViewer extends JFrame {
 		});
 		btnReturnToStables.setBounds(140, 209, 154, 42);
 		contentPane.add(btnReturnToStables);
+		
+		JLabel lblHorsePicture = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/horse.png")).getImage();
+		lblHorsePicture.setIcon(new ImageIcon(img));
+		lblHorsePicture.setBounds(209, 156, 215, -137);
+		contentPane.add(lblHorsePicture);
 		
 		}catch(Exception e1) {
 			System.out.print(e1);

@@ -74,10 +74,22 @@ public class Menu extends JFrame {
 		contentPane.add(btnViewStable);
 		
 		JButton btnNewButton = new JButton("Manage Jockeys");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageJockeys mj = new ManageJockeys();
+				mj.setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(294, 100, 130, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnViewRaceResults = new JButton("View Race Results");
+		btnViewRaceResults.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Racer r = new Racer();
+				r.setVisible(true);
+			}
+		});
 		btnViewRaceResults.setBounds(10, 134, 194, 51);
 		contentPane.add(btnViewRaceResults);
 		

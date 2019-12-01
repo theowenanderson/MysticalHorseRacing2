@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FeedHorse extends JFrame {
 
@@ -36,7 +38,7 @@ public class FeedHorse extends JFrame {
 	 */
 	public FeedHorse() {
 		setTitle("Feed your horse!");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 161);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,6 +60,11 @@ public class FeedHorse extends JFrame {
 		contentPane.add(lblSelectFood);
 		
 		JButton btnReturnToHorse = new JButton("Return to Horse Viewer");
+		btnReturnToHorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnReturnToHorse.setBounds(10, 89, 414, 23);
 		contentPane.add(btnReturnToHorse);
 	}
