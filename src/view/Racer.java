@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 
 import javax.swing.JFrame;
@@ -158,16 +159,26 @@ public class Racer extends JFrame {
 			h.add(new Horse());
 			num_horses++;
 		}
-		int finish = 1000;
-		for(int i = 0; x <= finish; x++) {
-			
-		}
+		Random rand = new Random();
+		int num = rand.nextInt(h.size());
+		List<Integer> num_list = new ArrayList<Integer>();
+		lbl_1st.setText(h.get(3).getName());
+		lbl_2nd.setText(h.get(2).getName());
+		lbl_3rd.setText(h.get(5).getName());
+		lbl_4th.setText(h.get(7).getName());
+		lbl_5th.setText(h.get(1).getName());
+		lbl_6th.setText(h.get(4).getName());
+		lbl_7th.setText(h.get(0).getName());
+		lbl_8th.setText(h.get(6).getName());
 		
 	}
 
 }
 /*								
-							
-					}
+							int finish = 1000;
+		for(int i = 0; x <= finish; x++) {
+			
+		}		
+					
  * 
  */ 
