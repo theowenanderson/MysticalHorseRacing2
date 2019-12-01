@@ -12,7 +12,7 @@ public class Horse {
 	private int confidence;
 	private int luck;
 	
-	public Horse(String name, int id, int legSize, int bodySize, int stamina, int strength, int acceleration,
+	public Horse( int id,String name, int legSize, int bodySize, int stamina, int strength, int acceleration,
 			int confidence, int luck) {
 		super();
 		this.name = name;
@@ -25,6 +25,9 @@ public class Horse {
 		this.confidence = confidence;
 		this.luck = luck;
 
+	}
+	public Horse() {
+		
 	}
 	public String getName() {
 		return name;

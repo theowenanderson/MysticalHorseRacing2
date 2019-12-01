@@ -102,7 +102,6 @@ public class LoginScreen extends JFrame {
 							sql = "Select balance from Users where username='"+username+"'";
 							rs = stmt.executeQuery(sql);
 							if(rs.next()) {
-								System.out.println("yes");
 								GameEngine.userIDbalance = rs.getInt("balance");
 								
 							}

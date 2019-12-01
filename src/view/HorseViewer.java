@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HorseViewer extends JFrame {
 
@@ -40,16 +42,19 @@ public class HorseViewer extends JFrame {
 	 */
 	public HorseViewer() {
 		Connection conn = GameEngine.getConnection();
-		int[] horses = {};
+		String[] horses = {""};
 		
 		int i = 0;
+		try{
 		Statement stmt = conn.createStatement();
-		String sql = "Select * from horses where linked_user_id='"+GameEngine.userID_current+"'";
+		String sql = "Select horse_name from horses where linked_user_id='"+GameEngine.userID_current+"'";
 		ResultSet rs = stmt.executeQuery(sql);
-		rs = stmt.executeQuery(sql);
-		while(rs.next()) {
-			horses[i] = rs.getInt("horse_name");
-			i++;
+		if(rs.next()) {
+			horses[0] = (rs.getString("horse_name"));
+
+		}
+		}catch(Exception e1) {
+			System.out.print(e1);
 		}
 		
 		setTitle("View Horses");
@@ -69,6 +74,11 @@ public class HorseViewer extends JFrame {
 		contentPane.add(btnRetireHorse);
 		
 		JButton btnReturnToStables = new JButton("Return to Stables");
+		btnReturnToStables.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnReturnToStables.setBounds(140, 209, 154, 42);
 		contentPane.add(btnReturnToStables);
 		

@@ -321,7 +321,7 @@ public class HorseCreator extends JFrame {
 				int luck = Integer.valueOf(lbl7.getText());
 				int total = val_legsize + val_bodysize + stamina + strength + acceleration + confidence + luck;
 				String horse_name = horseName.getText();
-				Horse h = new Horse(horse_name,val_legsize, val_bodysize, stamina, strength, acceleration, confidence, luck, total);
+				
 				Connection conn = GameEngine.getConnection();
 				PreparedStatement createHorse;
 				try {

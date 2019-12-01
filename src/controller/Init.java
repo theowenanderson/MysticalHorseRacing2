@@ -12,7 +12,6 @@ public class Init {
 
 	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
-		System.out.println("this ran");
 		GameEngine game = new GameEngine();
 		TimerTaskControl ttc = new TimerTaskControl();
 		ttc.create();

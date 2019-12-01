@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.sql.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,9 +12,11 @@ import controller.GameEngine;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Menu extends JFrame {
 
@@ -95,6 +98,20 @@ public class Menu extends JFrame {
 		contentPane.add(btnLogOut);
 		
 		JButton btnEnterRace = new JButton("Enter Race");
+		btnEnterRace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Connection conn = GameEngine.getConnection();
+					PreparedStatement enterRace = conn.prepareStatement("INSERT INTO race (user_id_entered) VALUES ('"+GameEngine.userID_current+"')");				
+					enterRace.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Entering Race Successful");
+					}
+				catch(Exception e1) {
+					JOptionPane.showMessageDialog(null, "Entering Race Failed");
+					System.out.print(e1);
+				}
+			}
+		});
 		btnEnterRace.setBounds(10, 196, 414, 55);
 		contentPane.add(btnEnterRace);
 		
