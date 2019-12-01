@@ -13,6 +13,7 @@ import controller.GameEngine;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -83,10 +84,13 @@ public class HorseViewer extends JFrame {
 				String horse_name = comboBoxHorseSelection.getSelectedItem().toString();
 				PreparedStatement removeHorse;
 				try {
-					removeHorse = conn.prepareStatement("DELETE FROM horses WHERE linked_user_id='"+GameEngine.userID_current+"' AND horse_name="+horse_name);
+					removeHorse = conn.prepareStatement("Delete from horses where linked_user_id='"+GameEngine.userID_current+
+							"' and horse_name='"+horse_name+"'");
 					removeHorse.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Retiring Successful");
 				} catch (SQLException e2) {
 					JOptionPane.showMessageDialog(null, "Horse was not retired.");
+					e2.printStackTrace();
 				}
 				//"DELETE FROM horses WHERE linked_user_id='"+GameEngine.userID_current+"' AND horse_name="+horse_name;
 			}

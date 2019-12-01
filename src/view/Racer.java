@@ -119,28 +119,29 @@ public class Racer extends JFrame {
 		
 		
 		Statement stmt;
-		int x = 1;
+		int x = 0;
+		boolean state = true;
+		int id;
 		List<Horse> h = new ArrayList<Horse>();
+		List<Integer> id_list = new ArrayList<Integer>();
 
 		try {
 			stmt = conn.createStatement();
 			String sql = "Select * from race";					
 			ResultSet rs = stmt.executeQuery(sql);
-			if(rs.next()) {
-				int id = rs.getInt(x);
-				sql = "Select * from horses where linked_user_id='"+id+"'";
-				rs.close();
-				ResultSet rs2 = stmt.executeQuery(sql);
-				if(rs2.next()) {
-							
-							h.add(new Horse(id,rs2.getString("horse_name"),
-							rs2.getInt("horse_legsize"),rs2.getInt("horse_bodysize"),rs2.getInt("horse_stamina")
-							,rs2.getInt("horse_strength"),rs2.getInt("horse_acceleration"),rs2.getInt("horse_confidence")
-							,rs2.getInt("horse_luck")));
-				}
+			while(rs.next()) {
+				id_list.add(rs.getInt("user_id_entered"));
 				
-				System.out.println("test");
 			}
+
+			
+			
+			
+				
+			
+			
+
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -155,4 +156,12 @@ public class Racer extends JFrame {
 	}
 
 }
-
+/*								
+								h.add(new Horse(id_list.get(x),rs2.getString("horse_name"),
+								rs2.getInt("horse_legsize"),rs2.getInt("horse_bodysize"),rs2.getInt("horse_stamina")
+								,rs2.getInt("horse_strength"),rs2.getInt("horse_acceleration"),rs2.getInt("horse_confidence")
+								,rs2.getInt("horse_luck")));
+								x++;
+					}
+ * 
+ */ 
