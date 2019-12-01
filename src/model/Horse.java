@@ -30,7 +30,7 @@ public class Horse {
 	//Random horse create
 	public Horse() {
 		Random rand = new Random();
-		this.name = "CPU" + rand.nextInt(1000);
+		this.name = "CPU";
 		this.id = -1;
 		this.legSize = rand.nextInt(7);
 		this.bodySize = rand.nextInt(7);
