@@ -53,9 +53,6 @@ public class HorseViewer extends JFrame {
 			horses[0] = (rs.getString("horse_name"));
 
 		}
-		}catch(Exception e1) {
-			System.out.print(e1);
-		}
 		
 		setTitle("View Horses");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,9 +66,31 @@ public class HorseViewer extends JFrame {
 		btnFeedHorse.setBounds(10, 175, 174, 23);
 		contentPane.add(btnFeedHorse);
 		
+		JComboBox comboBoxHorseSelection = new JComboBox(horses);
+		comboBoxHorseSelection.setSelectedIndex(0);
+		comboBoxHorseSelection.setBounds(140, 95, 154, 20);
+		contentPane.add(comboBoxHorseSelection);
+		
+		JLabel lblSelectHorse = new JLabel("Select a Horse");
+		lblSelectHorse.setBounds(178, 70, 96, 14);
+		contentPane.add(lblSelectHorse);
+		
 		JButton btnRetireHorse = new JButton("Retire Selected Horse");
 		btnRetireHorse.setBounds(250, 175, 174, 23);
 		contentPane.add(btnRetireHorse);
+		btnRetireHorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String horse_name = comboBoxHorseSelection.getSelectedItem().toString();
+				PreparedStatement removeHorse;
+				try {
+					removeHorse = conn.prepareStatement("DELETE FROM horses WHERE linked_user_id='"+GameEngine.userID_current+"' AND horse_name="+horse_name);
+					removeHorse.executeUpdate();
+				} catch (SQLException e2) {
+					JOptionPane.showMessageDialog(null, "Horse was not retired.");
+				}
+				//"DELETE FROM horses WHERE linked_user_id='"+GameEngine.userID_current+"' AND horse_name="+horse_name;
+			}
+		});
 		
 		JButton btnReturnToStables = new JButton("Return to Stables");
 		btnReturnToStables.addActionListener(new ActionListener() {
@@ -82,13 +101,8 @@ public class HorseViewer extends JFrame {
 		btnReturnToStables.setBounds(140, 209, 154, 42);
 		contentPane.add(btnReturnToStables);
 		
-		JComboBox comboBoxHorseSelection = new JComboBox(horses);
-		comboBoxHorseSelection.setSelectedIndex(0);
-		comboBoxHorseSelection.setBounds(140, 95, 154, 20);
-		contentPane.add(comboBoxHorseSelection);
-		
-		JLabel lblSelectHorse = new JLabel("Select a Horse");
-		lblSelectHorse.setBounds(178, 70, 96, 14);
-		contentPane.add(lblSelectHorse);
+		}catch(Exception e1) {
+			System.out.print(e1);
+		}
 	}
 }
