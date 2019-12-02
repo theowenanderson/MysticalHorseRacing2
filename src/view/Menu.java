@@ -101,6 +101,7 @@ public class Menu extends JFrame {
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameEngine.userID_current = 0;
+				JOptionPane.showMessageDialog(null,"Successfully Logged out");
 				dispose();
 				LoginScreen ls = new LoginScreen();
 				ls.setVisible(true);

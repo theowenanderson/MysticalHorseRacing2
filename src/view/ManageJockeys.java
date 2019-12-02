@@ -1,13 +1,18 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.sql.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.GameEngine;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,6 +41,8 @@ public class ManageJockeys extends JFrame {
 	 * Create the frame.
 	 */
 	public ManageJockeys() {
+		String currentJockey = "";
+		Connection conn = GameEngine.getConnection();
 		setTitle("Manage Jockeys");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 178);
@@ -45,6 +52,12 @@ public class ManageJockeys extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnHireJockey = new JButton("Hire Jockey");
+		btnHireJockey.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HireJockey h = new HireJockey();
+				h.setVisible(true);
+			}
+		});
 		btnHireJockey.setBounds(10, 11, 130, 118);
 		contentPane.add(btnHireJockey);
 		
@@ -56,28 +69,31 @@ public class ManageJockeys extends JFrame {
 		JButton btnFireJockey = new JButton("Fire Jockey");
 		btnFireJockey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String jockyName = ""
+				String jockeyName = "";
 				String sql = "Select jockey_name from jockeys where linked_user_id='"+GameEngine.userID_current+"'";
-				ResultSet rs = stmt.executeQuery(sql);
-				if(rs.next()) {
-					
-					jockyName = (rs.getString("jockey_name"));
-					//If there is a jockey associated with the account, set the desired string as the jockey's name.
-					PreparedStatement removeJockey;
+	
 					try {
+						ResultSet rs = stmt.executeQuery(sql);
+						if(rs.next()) {
+							
+							jockeyName = (rs.getString("jockey_name"));
+							//If there is a  associated with the account, set the desired string as the jockey's name.
+							PreparedStatement removeJockey;
 						removeJockey = conn.prepareStatement("Delete from jockeys where linked_user_id='"+GameEngine.userID_current+
 								"'");
 						removeJockey.executeUpdate();
 						JOptionPane.showMessageDialog(null, "Fired Jockey Successfully");
-					} catch (SQLException e2) {
+						}
+					}
+					 catch (SQLException e2) {
 						JOptionPane.showMessageDialog(null, "Jockey was not fired.");
 						e2.printStackTrace();
 					}
 					
-				}
-				else{
-					JOptionPane.showMessageDialog(null, "No Jockey to Fire");
-				}
+				
+				
+					
+				
 				
 				
 			}
@@ -97,17 +113,17 @@ public class ManageJockeys extends JFrame {
 		btnReturnToMain.setBounds(150, 61, 135, 68);
 		contentPane.add(btnReturnToMain);
 		
-		String currentJocky = "";
+		
 		String sql = "Select jockey_name from jockeys where linked_user_id='"+GameEngine.userID_current+"'";
 		ResultSet rs = stmt.executeQuery(sql);
 		if(rs.next()) {
 			
-			currentJocky = (rs.getString("jockey_name"));
+			currentJockey = (rs.getString("jockey_name"));
 			//If there is a jockey associated with the account, set the desired string as the jockey's name.
 			
 		}
 		else{
-			currentJocky = "No Jockey Currently";
+			currentJockey = "No Jockey Currently";
 		}
 		
 		
@@ -115,11 +131,12 @@ public class ManageJockeys extends JFrame {
 			System.out.print(e1);
 		}
 		
-		JLabel lblCurrentJockeyName = new JLabel(currentJocky);
+		JLabel lblCurrentJockeyName = new JLabel("");
 		lblCurrentJockeyName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurrentJockeyName.setToolTipText("Name of your current jockey.");
 		lblCurrentJockeyName.setBounds(150, 36, 135, 14);
 		contentPane.add(lblCurrentJockeyName);
+		lblCurrentJockeyName.setText(currentJockey);
 		
 		JLabel lblCurrentJockey = new JLabel("Current Jockey:");
 		lblCurrentJockey.setToolTipText("Name of your current jockey.");

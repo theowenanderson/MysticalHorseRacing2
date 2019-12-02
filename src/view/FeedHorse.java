@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,7 @@ public class FeedHorse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	public FeedHorse() {
 		setTitle("Feed your horse!");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

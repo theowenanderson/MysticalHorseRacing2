@@ -12,6 +12,7 @@ public class Horse {
 	private int acceleration;
 	private int confidence;
 	private int luck;
+	public int points = 0;
 	
 	public Horse( int id,String name, int legSize, int bodySize, int stamina, int strength, int acceleration,
 			int confidence, int luck) {
@@ -39,6 +40,105 @@ public class Horse {
 		this.acceleration = rand.nextInt(7);
 		this.confidence = rand.nextInt(7);
 		this.luck = rand.nextInt(7);
+	}
+	public Horse(int x) {
+		if(x == 1) {
+			this.name = "CPU1";
+			this.id = -1;
+			this.legSize = 4;
+			this.bodySize = 2;
+			this.stamina = 5;
+			this.strength = 3;
+			this.acceleration = 8;
+			this.confidence = 9;
+			this.luck = 5;
+			this.points = 0;
+		}
+		else if(x == 2) {
+			this.name = "CPU2";
+			this.id = -1;
+			this.legSize = 4;
+			this.bodySize = 6;
+			this.stamina = 5;
+			this.strength = 8;
+			this.acceleration = 1;
+			this.confidence = 3;
+			this.luck = 5;
+			this.points = 0;
+		}
+		else if(x == 3) {
+			this.name = "CPU3";
+			this.id = -1;
+			this.legSize = 6;
+			this.bodySize = 5;
+			this.stamina = 4;
+			this.strength = 3;
+			this.acceleration = 2;
+			this.confidence = 3;
+			this.luck = 6;
+			this.points = 0;
+		}
+		else if(x == 4) {
+			this.name = "CPU4";
+			this.id = -1;
+			this.legSize = 7;
+			this.bodySize = 4;
+			this.stamina = 8;
+			this.strength = 3;
+			this.acceleration = 5;
+			this.confidence = 3;
+			this.luck = 8;
+			this.points = 0;
+		}
+		else if(x == 5) {
+			this.name = "CPU5";
+			this.id = -1;
+			this.legSize = 6;
+			this.bodySize = 3;
+			this.stamina = 9;
+			this.strength = 3;
+			this.acceleration = 2;
+			this.confidence = 7;
+			this.luck = 5;
+			this.points = 0;
+			
+		}
+		else if(x == 6) {
+			this.name = "CPU6";
+			this.id = -1;
+			this.legSize = 3;
+			this.bodySize = 8;
+			this.stamina = 9;
+			this.strength = 2;
+			this.acceleration = 3;
+			this.confidence = 4;
+			this.luck = 5;
+			this.points = 0;
+		}
+		else if(x == 7) {
+			this.name = "CPU7";
+			this.id = -1;
+			this.legSize = 4;
+			this.bodySize = 2;
+			this.stamina = 5;
+			this.strength = 3;
+			this.acceleration = 1;
+			this.confidence = 3;
+			this.luck = 5;
+			this.points = 0;
+		}
+		else if(x == 8) {
+			this.name = "CPU8";
+			this.id = -1;
+			this.legSize = 4;
+			this.bodySize = 6;
+			this.stamina = 9;
+			this.strength = 1;
+			this.acceleration = 1;
+			this.confidence = 3;
+			this.luck = 5;
+			this.points = 0;
+		}
 	}
 	public String getName() {
 		return name;
@@ -93,6 +193,15 @@ public class Horse {
 	}
 	public void setLuck(int luck) {
 		this.luck = luck;
+	}
+	public int getPoints() {
+		return this.points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	public void addPoints(int p) {
+		this.points += p;
 	}
 	@Override
 	public String toString() {

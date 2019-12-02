@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -33,6 +34,7 @@ public class Racer extends JFrame {
 				try {
 					Racer frame = new Racer();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -116,7 +118,24 @@ public class Racer extends JFrame {
 		contentPane.add(lbl_8th);
 		
 		//Racing algorithm
-		Connection conn = GameEngine.getConnection();
+		race(lbl_1st,lbl_2nd,lbl_3rd,lbl_4th,lbl_5th,lbl_6th,lbl_7th,lbl_8th);
+
+		/*sql = "update users set balance = 1300 where id='"+h.get(1).getId()+"'";
+		ResultSet rs3;
+		try {
+			stmt = conn.createStatement();
+			rs3 = stmt.executeQuery(sql);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		
+	}
+	public void race(JLabel j1,JLabel j2, JLabel j3, JLabel j4, JLabel j5, JLabel j6, JLabel j7, JLabel j8 ) {
+Connection conn = GameEngine.getConnection();
 		
 		
 		Statement stmt;
@@ -156,41 +175,47 @@ public class Racer extends JFrame {
 		}
 		int num_horses = id_list.size();
 		while(num_horses != 8) {
-			h.add(new Horse());
+			h.add(new Horse(num_horses));
 			num_horses++;
 		}
 		Random rand = new Random();
 		int num = rand.nextInt(h.size());
 		List<Integer> num_list = new ArrayList<Integer>();
-		lbl_1st.setText(h.get(3).getName());
-		lbl_2nd.setText(h.get(1).getName());
-		lbl_3rd.setText(h.get(5).getName());
-		lbl_4th.setText(h.get(7).getName());
-		lbl_5th.setText(h.get(2).getName());
-		lbl_6th.setText(h.get(4).getName());
-		lbl_7th.setText(h.get(0).getName());
-		lbl_8th.setText(h.get(6).getName());
-		/*sql = "update users set balance = 1300 where id='"+h.get(1).getId()+"'";
-		ResultSet rs3;
-		try {
-			stmt = conn.createStatement();
-			rs3 = stmt.executeQuery(sql);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+		int time = 0;
+		while(time < 100) {
+		
 
 		
+			
+			for(int y = 0; y<8; y++) {
+				int val = (int) ((h.get(y).getLegSize() * time)+ (h.get(y).getBodySize() * time));
+				h.get(y).addPoints(val);
+			}
+			
+			for(int y = 0, z = 1; z < 8; y++,z++) {
+				if(h.get(y).getPoints() <= h.get(z).getPoints()) {
+					Collections.swap(h,y,z);
+				}
+			}
+			
+			
+			
+			// update listing
+			j1.setText(h.get(0).getName());
+			j2.setText(h.get(1).getName());
+			j3.setText(h.get(2).getName());
+			j4.setText(h.get(3).getName());
+			j5.setText(h.get(4).getName());
+			j6.setText(h.get(5).getName());
+			j7.setText(h.get(6).getName());
+			j8.setText(h.get(7).getName());
+			time++;
+
+		}
+		
+		
 	}
+	
 
 }
-/*								
-							int finish = 1000;
-		for(int i = 0; x <= finish; x++) {
-			
-		}		
-					
- * 
- */ 
+
