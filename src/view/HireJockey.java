@@ -88,12 +88,12 @@ public class HireJockey extends JFrame {
 						//Add Jockey to database here.  I can't actually test this code, so I'll write some dummy code that should work.
 						String val_name = j.getName();
 						String val_skill = j.getSkill();
-						/*
+						
 						Connection conn = GameEngine.getConnection();
 						PreparedStatement addJockey;
 						try {
-							addJockey = conn.prepareStatement("INSERT INTO jockeys (linked_user_id,jockey_name,jockey_skill)"
-									+ " VALUES ('"+GameEngine.userID_current+"','"+val_name+"', '"+val_skill+"')");
+							addJockey = conn.prepareStatement("INSERT INTO jockeys (size,experience,linked_user_id,jockey_name)"
+									+ " VALUES ('8','8','"+GameEngine.userID_current+"','"+val_name+"')");
 							addJockey.executeUpdate();
 							JOptionPane.showMessageDialog(null, "Purchase of Jockey successful");
 							GameEngine.userIDbalance -= 500;
@@ -103,7 +103,7 @@ public class HireJockey extends JFrame {
 							JOptionPane.showMessageDialog(null, "Horse Creation failed");
 							e1.printStackTrace();
 						}				
-						*/
+						
 					}
 				}
 				

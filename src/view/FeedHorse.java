@@ -45,14 +45,26 @@ public class FeedHorse extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnFeedAndReturn = new JButton("Feed Horse and Return to Horse Viewer");
-		btnFeedAndReturn.setBounds(10, 60, 414, 23);
-		contentPane.add(btnFeedAndReturn);
-		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("Pick the food you will feed your horse!");
 		comboBox.setBounds(165, 29, 109, 20);
 		contentPane.add(comboBox);
+		
+		comboBox.addItem("Carrot");
+		comboBox.addItem("Eggplant");
+		comboBox.addItem("Sugar Cube");
+		comboBox.addItem("Various Fruits");
+		
+		JButton btnFeedAndReturn = new JButton("Feed Horse and Return to Horse Viewer");
+		btnFeedAndReturn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selectedFood = comboBox.getSelectedItem().toString();
+				JOptionPane.showMessageDialog(null, "Your horse has been fed the " + selectedFood);
+				dispose();
+			}
+		});
+		btnFeedAndReturn.setBounds(10, 60, 414, 23);
+		contentPane.add(btnFeedAndReturn);
 		
 		JLabel lblSelectFood = new JLabel("Select food!");
 		lblSelectFood.setHorizontalAlignment(SwingConstants.CENTER);

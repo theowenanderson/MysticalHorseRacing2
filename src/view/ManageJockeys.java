@@ -48,9 +48,45 @@ public class ManageJockeys extends JFrame {
 		btnHireJockey.setBounds(10, 11, 130, 118);
 		contentPane.add(btnHireJockey);
 		
+		
+		try{
+		Statement stmt = conn.createStatement();
+		
+		
 		JButton btnFireJockey = new JButton("Fire Jockey");
+		btnFireJockey.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String jockyName = ""
+				String sql = "Select jockey_name from jockeys where linked_user_id='"+GameEngine.userID_current+"'";
+				ResultSet rs = stmt.executeQuery(sql);
+				if(rs.next()) {
+					
+					jockyName = (rs.getString("jockey_name"));
+					//If there is a jockey associated with the account, set the desired string as the jockey's name.
+					PreparedStatement removeJockey;
+					try {
+						removeJockey = conn.prepareStatement("Delete from jockeys where linked_user_id='"+GameEngine.userID_current+
+								"'");
+						removeJockey.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Fired Jockey Successfully");
+					} catch (SQLException e2) {
+						JOptionPane.showMessageDialog(null, "Jockey was not fired.");
+						e2.printStackTrace();
+					}
+					
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "No Jockey to Fire");
+				}
+				
+				
+			}
+		});
 		btnFireJockey.setBounds(294, 11, 130, 118);
 		contentPane.add(btnFireJockey);
+		
+		
+		
 		
 		JButton btnReturnToMain = new JButton("Return to Main Menu");
 		btnReturnToMain.addActionListener(new ActionListener() {
@@ -61,7 +97,25 @@ public class ManageJockeys extends JFrame {
 		btnReturnToMain.setBounds(150, 61, 135, 68);
 		contentPane.add(btnReturnToMain);
 		
-		JLabel lblCurrentJockeyName = new JLabel("No Jockey Currently");
+		String currentJocky = "";
+		String sql = "Select jockey_name from jockeys where linked_user_id='"+GameEngine.userID_current+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		if(rs.next()) {
+			
+			currentJocky = (rs.getString("jockey_name"));
+			//If there is a jockey associated with the account, set the desired string as the jockey's name.
+			
+		}
+		else{
+			currentJocky = "No Jockey Currently";
+		}
+		
+		
+		}catch(Exception e1) {
+			System.out.print(e1);
+		}
+		
+		JLabel lblCurrentJockeyName = new JLabel(currentJocky);
 		lblCurrentJockeyName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurrentJockeyName.setToolTipText("Name of your current jockey.");
 		lblCurrentJockeyName.setBounds(150, 36, 135, 14);
