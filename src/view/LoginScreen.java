@@ -90,16 +90,16 @@ public class LoginScreen extends JFrame {
 					//Class.forName("com.mysql.jdbc.Driver");
 					
 					Statement stmt = conn.createStatement();
-					String sql = "Select * from Users where username='"+username+"' and Password='"+password+"'";					
+					String sql = "Select * from users where username='"+username+"' and Password='"+password+"'";					
 					ResultSet rs = stmt.executeQuery(sql);
 					if(rs.next()) {
 						JOptionPane.showMessageDialog(null, "Login Successful");
 						GameEngine.username_current = username;
-						sql = "Select id from Users where username='"+username+"'";
+						sql = "Select id from users where username='"+username+"'";
 						rs = stmt.executeQuery(sql);
 						if(rs.next()) {
 							GameEngine.userID_current = rs.getInt("id");
-							sql = "Select balance from Users where username='"+username+"'";
+							sql = "Select balance from users where username='"+username+"'";
 							rs = stmt.executeQuery(sql);
 							if(rs.next()) {
 								GameEngine.userIDbalance = rs.getInt("balance");
