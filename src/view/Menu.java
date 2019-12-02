@@ -116,19 +116,39 @@ public class Menu extends JFrame {
 				try {
 					Connection conn = GameEngine.getConnection();
 					
-					Statement stmt = conn.createStatement();
-					String checkRace = "Select * from race where user_id_entered='" +GameEngine.userID_current+ "'";
-					ResultSet rs = stmt.executeQuery(checkRace);
-					if(!rs.next())
-					{
-						PreparedStatement enterRace = conn.prepareStatement("INSERT INTO race (user_id_entered) VALUES ('"+GameEngine.userID_current+"')");				
-						enterRace.executeUpdate();
-						JOptionPane.showMessageDialog(null, "Entering Race Successful");
+					Statement stmt1 = conn.createStatement();
+					String checkRaceHorse = "Select * from horses where linked_user_id='"+GameEngine.userID_current+"'";
+					ResultSet rs1 = stmt1.executeQuery(checkRaceHorse);
+					if(rs1.next()){
 						
+						Statement stmt2 = conn.createStatement();
+						String checkRaceJockey = "Select * from jockeys where linked_user_id='"+GameEngine.userID_current+"'";
+						ResultSet rs2 = stmt2.executeQuery(checkRaceJockey);
+						if(rs2.next()){
+							
+							Statement stmt = conn.createStatement();
+							String checkRace = "Select * from race where user_id_entered='" +GameEngine.userID_current+ "'";
+							ResultSet rs = stmt.executeQuery(checkRace);
+							if(!rs.next())
+							{
+								
+								PreparedStatement enterRace = conn.prepareStatement("INSERT INTO race (user_id_entered) VALUES ('"+GameEngine.userID_current+"')");				
+								enterRace.executeUpdate();
+								JOptionPane.showMessageDialog(null, "Entering Race Successful");
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Already entered into race");
+							}
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Cannot enter race due to lack of Jockey.");
+						}
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(null, "Already entered into race");
+						JOptionPane.showMessageDialog(null, "Cannot enter race because you do not have a horse.");
 					}
 					
 					}
