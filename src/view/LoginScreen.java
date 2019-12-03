@@ -118,6 +118,7 @@ public class LoginScreen extends JFrame {
 		panel.add(lblNewLabel);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 					Connection conn = GameEngine.getConnection();
 					String username = passwordField.getText();
 					String password = textField.getText();
@@ -131,6 +132,25 @@ public class LoginScreen extends JFrame {
 							JOptionPane.showMessageDialog(null, "Login Successful");
 							GameEngine.username_current = username;
 							sql = "Select id from users where username='"+username+"'";
+=======
+				Connection conn = GameEngine.getConnection();
+				String username = user.getText();
+				String password = pass.getText();
+				try {
+					//Class.forName("com.mysql.jdbc.Driver");
+					
+					Statement stmt = conn.createStatement();
+					String sql = "Select * from users where username='"+username+"' and Password='"+password+"'";					
+					ResultSet rs = stmt.executeQuery(sql);
+					if(rs.next()) {
+						JOptionPane.showMessageDialog(null, "Login Successful");
+						GameEngine.username_current = username;
+						sql = "Select id from users where username='"+username+"'";
+						rs = stmt.executeQuery(sql);
+						if(rs.next()) {
+							GameEngine.userID_current = rs.getInt("id");
+							sql = "Select balance from users where username='"+username+"'";
+>>>>>>> b90656c90ce8c27e4ee1a199caa6fcfded36a674
 							rs = stmt.executeQuery(sql);
 							if(rs.next()) {
 								GameEngine.userID_current = rs.getInt("id");
