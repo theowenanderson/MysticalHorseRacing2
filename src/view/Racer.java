@@ -232,6 +232,10 @@ public class Racer extends JFrame {
 		}
 		
 		GameEngine.raceinprogress = 0;
+		
+		sq2 = "Delete * from race";	
+		ResultSet rs3 = stmt.executeQuery(sq2);
+		
 	}
 		else {
 			JOptionPane.showMessageDialog(null,"Race has not begun yet");
