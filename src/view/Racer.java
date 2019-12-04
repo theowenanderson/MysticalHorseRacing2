@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -233,10 +234,11 @@ public class Racer extends JFrame {
 		
 		GameEngine.raceinprogress = 0;
 		
-		sql = "Delete * from race";	
+		
+		PreparedStatement removeRace;
 		try {
-			stmt = conn.createStatement();
-			ResultSet rs3 = stmt.executeQuery(sql);
+			removeRace = conn.prepareStatement("Delete * from race");
+			removeRace.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
