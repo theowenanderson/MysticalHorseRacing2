@@ -6,6 +6,7 @@ public class GameEngine {
 	public static String username_current = "";
 	public static int userID_current;
 	public static int userIDbalance;
+	public static int raceinprogress = 0;
 	public void initialize() {
 		Connection initConnect = getConnection();
 		//test
@@ -19,6 +20,7 @@ public class GameEngine {
 		String username = "sql9314118";
 		String pass = "fBAhsdUvtm";
 		
+		// URL for database
 		String url = "jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9314118";
 		try {
 			Connection conn = DriverManager.getConnection(url,username,pass);

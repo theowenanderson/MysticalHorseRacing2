@@ -109,6 +109,8 @@ public class HorseViewer extends JFrame {
 		btnReturnToStables.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				Stable s = new Stable();
+				s.setVisible(true);
 			}
 		});
 		btnReturnToStables.setBounds(140, 209, 154, 42);

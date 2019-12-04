@@ -20,6 +20,10 @@ import controller.GameEngine;
 import model.Horse;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Racer extends JFrame {
 
@@ -119,6 +123,18 @@ public class Racer extends JFrame {
 		
 		//Racing algorithm
 		race(lbl_1st,lbl_2nd,lbl_3rd,lbl_4th,lbl_5th,lbl_6th,lbl_7th,lbl_8th);
+		
+		JLabel lblPreviousRace = new JLabel("Race Results");
+		lblPreviousRace.setBounds(27, 236, 75, 14);
+		contentPane.add(lblPreviousRace);
+		
+		JLabel lbl_5th_sim = new JLabel("");
+		lbl_5th_sim.setBounds(302, 111, 122, 14);
+		contentPane.add(lbl_5th_sim);
+		
+		JLabel lbl_7th_sim = new JLabel("");
+		lbl_7th_sim.setBounds(302, 167, 122, 14);
+		contentPane.add(lbl_7th_sim);
 
 		/*sql = "update users set balance = 1300 where id='"+h.get(1).getId()+"'";
 		ResultSet rs3;
@@ -135,14 +151,15 @@ public class Racer extends JFrame {
 		
 	}
 	public void race(JLabel j1,JLabel j2, JLabel j3, JLabel j4, JLabel j5, JLabel j6, JLabel j7, JLabel j8 ) {
-Connection conn = GameEngine.getConnection();
+		Connection conn = GameEngine.getConnection();
 		
 		
+		if(GameEngine.raceinprogress == 1) {
+			
+			// Horse Participants are based inside an ArrayList
+			
 		Statement stmt;
-	
 		int x = 0;
-		boolean state = true;
-		int id;
 		List<Horse> h = new ArrayList<Horse>();
 		List<Integer> id_list = new ArrayList<Integer>();
 		String sql;
@@ -155,7 +172,7 @@ Connection conn = GameEngine.getConnection();
 			}
 			rs.close();
 			for(int i: id_list) {
-				System.out.println("got here");
+				// Go through all horses entered in database and retrieve data
 				sql = "Select * from horses where linked_user_id='"+i+"'";	
 				ResultSet rs2 = stmt.executeQuery(sql);
 				if(rs2.next()) {
@@ -165,7 +182,6 @@ Connection conn = GameEngine.getConnection();
 							,rs2.getInt("horse_luck")));
 							x++;
 				}
-				else System.out.println("error in getting horse");
 				rs2.close();
 			}
 			
@@ -173,25 +189,27 @@ Connection conn = GameEngine.getConnection();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//Add Random preset horse CPU's via Horse(int) constructer
 		int num_horses = id_list.size();
 		while(num_horses != 8) {
 			h.add(new Horse(num_horses));
 			num_horses++;
 		}
-		Random rand = new Random();
-		int num = rand.nextInt(h.size());
-		List<Integer> num_list = new ArrayList<Integer>();
+		
+		// Go through race and find results
 		int time = 0;
 		while(time < 100) {
-		
-
-		
 			
+			// Main point finding algorithm, different stats are weighted differently
 			for(int y = 0; y<8; y++) {
-				int val = (int) ((h.get(y).getLegSize() * time)+ (h.get(y).getBodySize() * time));
+				int val = (int) ((h.get(y).getLegSize() * time * 0.8) + (h.get(y).getBodySize() * time * 0.9) + (h.get(y).getStamina()*time)+
+						(h.get(y).getStrength() * time * 1.1) + (h.get(y).getAcceleration() * time * 0.7) + (h.get(y).getConfidence() * time * 1.1)
+						+ (h.get(y).getLuck())*time * 0.9);
 				h.get(y).addPoints(val);
 			}
 			
+			// Swaps ArrayList with positons based on points
 			for(int y = 0, z = 1; z < 8; y++,z++) {
 				if(h.get(y).getPoints() <= h.get(z).getPoints()) {
 					Collections.swap(h,y,z);
@@ -213,9 +231,12 @@ Connection conn = GameEngine.getConnection();
 
 		}
 		
-		
+		GameEngine.raceinprogress = 0;
 	}
-	
-
+		else {
+			JOptionPane.showMessageDialog(null,"Race has not begun yet");
+			dispose();
+		}
+	}
 }
 

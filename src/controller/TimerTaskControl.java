@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class TimerTaskControl extends TimerTask {
 	
 	public void create() throws ParseException {
-		//the Date and time at which you want to execute
+		//the Date and time at which to execute
 	    DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    //Date date = new Date();
 	    //String curDate = date.toString();
@@ -23,7 +23,7 @@ public class TimerTaskControl extends TimerTask {
 	    	closestFiveMinsStr = "00";
 	    	curHour++;
 	    }
-	    //System.out.println("Current date is: " + curDate + ", current minute is: " + curMin + ", closest 5 min interval is: " + Integer.toString(closestFiveMins));
+	   
 	    
 	    String finalDate = LocalDateTime.now().getYear() + "-" + LocalDateTime.now().getMonthValue() + "-" + LocalDateTime.now().getDayOfMonth() + " " + Integer.toString(curHour) + ":" + closestFiveMinsStr + ":" + "00";
 	    //System.out.println(finalDate);
@@ -36,6 +36,7 @@ public class TimerTaskControl extends TimerTask {
 	    timer.schedule(new TimerTaskControl(), newDateMade, period );
 	}
 	public void run() {
+		GameEngine.raceinprogress = 1;
 		JOptionPane.showMessageDialog(null,"RACE HAS BEGUN");
 		BeginRace br = new BeginRace();
 		br.run();

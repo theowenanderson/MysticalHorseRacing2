@@ -42,14 +42,11 @@ public class Menu extends JFrame {
 	 * Create the frame.
 	 */
 	public Menu() {
-		
-
-		
-		
+		// All self explanatory, just takes user to requested menu's
 		
 		
 		setTitle("Main Menu");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,19 +80,15 @@ public class Menu extends JFrame {
 		btnNewButton.setBounds(294, 100, 130, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnViewRaceResults = new JButton("View Race Results");
+		JButton btnViewRaceResults = new JButton("View Race");
 		btnViewRaceResults.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Racer r = new Racer();
 				r.setVisible(true);
 			}
 		});
-		btnViewRaceResults.setBounds(10, 134, 194, 51);
+		btnViewRaceResults.setBounds(10, 134, 414, 51);
 		contentPane.add(btnViewRaceResults);
-		
-		JButton btnViewRaceIn = new JButton("View Race in Progress");
-		btnViewRaceIn.setBounds(230, 134, 194, 51);
-		contentPane.add(btnViewRaceIn);
 		
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {

@@ -12,6 +12,7 @@ public class Init {
 
 	public static void main(String[] args) throws ParseException {
 		// TODO Auto-generated method stub
+		// Create game state and start timer, initialize login screen
 		GameEngine game = new GameEngine();
 		TimerTaskControl ttc = new TimerTaskControl();
 		ttc.create();
