@@ -233,8 +233,14 @@ public class Racer extends JFrame {
 		
 		GameEngine.raceinprogress = 0;
 		
-		sq2 = "Delete * from race";	
-		ResultSet rs3 = stmt.executeQuery(sq2);
+		sql = "Delete * from race";	
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs3 = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 		else {
